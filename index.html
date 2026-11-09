@@ -1,0 +1,140 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="dark"><meta name="theme-color" content="#030a14">
+<title>Sentinel — Global Fraud Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#030a14;--pn:#07131f;--ln:#12344a;--tx:#dff6ff;--mu:#6f93a8;--cy:#38e8ff;--gr:#3dffa6;--am:#ffc14d;--rd:#ff4d6a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:inherit}html,body{margin:0}body{background:var(--bg);color:var(--tx);font:500 16px Rajdhani,'Segoe UI',sans-serif;min-height:100vh;background-image:linear-gradient(#0a2a3d33 1px,transparent 1px),linear-gradient(90deg,#0a2a3d33 1px,transparent 1px);background-size:44px 44px}
+.mono,button,input,.tag{font-family:'Share Tech Mono',ui-monospace,monospace}button{cursor:pointer}
+#intro{position:fixed;inset:0;z-index:50;background:radial-gradient(circle at 50% 46%,#06213a,#020710 70%);transition:opacity 1s,transform 1s}#intro.out{opacity:0;transform:scale(1.15);pointer-events:none}
+#hud{position:absolute;inset:0;width:100%;height:100%}
+.ititle{position:absolute;left:0;right:0;top:46%;transform:translateY(-50%);text-align:center;pointer-events:none}
+.ititle h1{margin:0;font:700 clamp(30px,7vw,64px) Rajdhani;letter-spacing:.5em;padding-left:.5em;color:#e9fbff;text-shadow:0 0 24px var(--cy);opacity:0;animation:fi 1.6s 1.2s forwards}
+.ititle p{margin:6px 0 0;font:12px 'Share Tech Mono';letter-spacing:.35em;color:var(--cy);opacity:0;animation:fi 1.4s 2s forwards}
+@keyframes fi{to{opacity:1}}
+#boot{position:absolute;left:18px;bottom:96px;font:11px/1.8 'Share Tech Mono';color:#5ec9dc;max-width:70vw}#boot b{color:var(--gr);font-weight:400}
+.ibar{position:absolute;left:18px;right:18px;bottom:60px;height:2px;background:#0d3045}.ibar i{display:block;height:100%;width:0;background:var(--cy);box-shadow:0 0 12px var(--cy)}
+#go{position:absolute;left:50%;bottom:min(8vh,48px);transform:translateX(-50%);background:#0000;color:var(--cy);border:1px solid var(--cy);padding:11px 30px;letter-spacing:.3em;font-size:13px;opacity:0;pointer-events:none;transition:.4s;box-shadow:0 0 18px #38e8ff44;clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}#go.on{opacity:1;pointer-events:auto;animation:pl 1.6s infinite}#go:hover{background:#38e8ff22}
+@keyframes pl{50%{box-shadow:0 0 34px #38e8ffaa}}
+.shell{max-width:1180px;margin:auto;padding:0 20px 40px;opacity:0;transform:translateY(14px);transition:1s .3s}body.live .shell{opacity:1;transform:none}
+.top{height:68px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--ln)}
+.brand{display:flex;gap:12px;align-items:center;font:700 22px Rajdhani;letter-spacing:.3em}.brand small{display:block;font:9px 'Share Tech Mono';letter-spacing:.25em;color:var(--mu)}
+.core{width:34px;height:34px;border-radius:50%;border:2px solid var(--cy);box-shadow:0 0 14px var(--cy),inset 0 0 10px #38e8ff66;position:relative;animation:sp 8s linear infinite;border-top-color:transparent}.core:after{content:'';position:absolute;inset:8px;border-radius:50%;background:radial-gradient(#fff,var(--cy) 60%,transparent)}
+@keyframes sp{to{transform:rotate(360deg)}}
+.st{font:11px 'Share Tech Mono';color:var(--mu)}.st i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gr);box-shadow:0 0 10px var(--gr);margin-right:7px}
+.hero{padding:34px 0 20px}.eb{font:11px 'Share Tech Mono';letter-spacing:.3em;color:var(--cy)}.hero h2{font:700 clamp(28px,5vw,44px) Rajdhani;margin:6px 0;letter-spacing:.02em}.hero p{margin:0;color:var(--mu);max-width:640px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.card{background:linear-gradient(160deg,#0a1b2a,#06111c);border:1px solid var(--ln);padding:16px 18px;position:relative;clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px)}
+.stat b{display:block;font:700 32px Rajdhani;color:var(--cy);text-shadow:0 0 14px #38e8ff55}.stat span{font:10px 'Share Tech Mono';color:var(--mu);letter-spacing:.12em;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,1fr);gap:14px}
+.ct{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}.ct h3{margin:0;font:700 20px Rajdhani;letter-spacing:.06em}.ct p{margin:2px 0 0;color:var(--mu);font-size:14px}.tag{font-size:10px;color:var(--cy);border:1px solid #1c5a73;padding:4px 7px}
+.row{display:flex;gap:8px}input{flex:1;min-width:0;background:#020912;border:1px solid #1c5a73;color:var(--tx);padding:13px 14px;font-size:14px;outline:none}input:focus{border-color:var(--cy);box-shadow:0 0 0 3px #38e8ff1f}
+.btn{background:var(--cy);color:#022029;border:0;padding:0 22px;font:700 15px Rajdhani;letter-spacing:.15em;white-space:nowrap}.btn:disabled{opacity:.5}
+.hint{font:11px 'Share Tech Mono';color:var(--mu);margin-top:10px}.hint a{color:var(--cy);cursor:pointer;margin-right:12px;text-decoration:underline dotted}
+#res{margin-top:16px}.scan{display:flex;gap:18px;align-items:center;border:1px solid var(--ln);padding:16px;background:#030c16}
+.radar{width:92px;height:92px;border-radius:50%;border:1px solid var(--cy);flex:none;background:conic-gradient(from 0deg,#38e8ff00 70%,#38e8ff88 100%),repeating-radial-gradient(#0000 0 14px,#38e8ff33 15px);animation:sp 1.2s linear infinite}
+#log{font:12px/1.7 'Share Tech Mono';color:#5ec9dc}
+.out{border:1px solid var(--ln);background:#030c16;animation:fi .5s}.head{display:flex;gap:20px;align-items:center;padding:18px;border-bottom:1px solid var(--ln);flex-wrap:wrap}
+.gauge{position:relative;width:120px;height:120px;flex:none}.gauge svg{transform:rotate(-90deg)}.gauge circle{fill:none;stroke-width:7}.gauge .bg{stroke:#0f3248}.gauge .fg{stroke-linecap:round;transition:stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 0 6px currentColor)}
+.gauge div{position:absolute;inset:0;display:grid;place-content:center;text-align:center}.gauge b{font:700 34px Rajdhani;line-height:1}.gauge small{font:9px 'Share Tech Mono';color:var(--mu)}
+.vd h4{margin:0;font:700 26px Rajdhani;letter-spacing:.08em}.vd p{margin:4px 0 0;color:var(--mu);font-size:14px;max-width:460px}
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--ln);border-bottom:1px solid var(--ln)}.parts div{background:#030c16;padding:10px 14px}.parts small{display:block;font:9px 'Share Tech Mono';color:var(--mu);letter-spacing:.12em}.parts span{font:13px 'Share Tech Mono';word-break:break-all}
+.sig{display:grid;grid-template-columns:20px 1fr 70px;gap:10px;align-items:center;padding:10px 18px;border-top:1px solid #0d2536;animation:fi .5s backwards}.sig:first-child{border:0}.sig b{font-weight:600}.sig small{display:block;color:var(--mu);font-size:13px}.sig .m{height:4px;background:#0f3248}.sig .m i{display:block;height:100%}
+.note{padding:12px 18px;font:11px/1.6 'Share Tech Mono';color:var(--mu);border-top:1px solid var(--ln)}
+.feed div{display:grid;grid-template-columns:8px 1fr auto;gap:10px;padding:10px 0;border-top:1px solid #0d2536;align-items:center}.feed div:first-child{border:0}.feed i{width:8px;height:8px;border-radius:50%;background:var(--rd);box-shadow:0 0 8px currentColor;color:var(--rd)}.feed i.a{background:var(--am);color:var(--am)}.feed b{font:12px 'Share Tech Mono';font-weight:400;word-break:break-all}.feed small{display:block;color:var(--mu);font-size:13px}.feed span{font:10px 'Share Tech Mono';color:var(--mu)}
+.ft{margin-top:22px;border-top:1px solid var(--ln);padding-top:14px;font:10px 'Share Tech Mono';color:var(--mu);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media(max-width:800px){.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.row{flex-direction:column}.btn{padding:12px}.scan{flex-direction:column;align-items:flex-start}.st{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important}}
+</style></head><body>
+<div id="intro"><canvas id="hud"></canvas><div class="ititle"><h1>SENTINEL</h1><p>GLOBAL FRAUD INTELLIGENCE</p></div><div id="boot"></div><div class="ibar"><i id="pb"></i></div><button id="go">INITIALIZE</button></div>
+<div class="shell"><header class="top"><div class="brand"><div class="core"></div><div>SENTINEL<small>GLOBAL FRAUD INTELLIGENCE</small></div></div><div class="st"><i></i>ALL SYSTEMS NOMINAL · <span id="clk"></span></div></header>
+<section class="hero"><div class="eb">// THREAT ANALYSIS CORE</div><h2 id="greet">Good day, security team</h2><p>Paste any link from anywhere in the world. Sentinel decodes it, hunts for impersonation, and fuses 20+ signals into one calibrated risk score.</p></section>
+<section class="stats"><div class="card stat"><b id="s1">0</b><span>URLs analyzed (session)</span></div><div class="card stat"><b id="s2">0</b><span>Flagged risky</span></div><div class="card stat"><b id="s3">0</b><span>Global brands tracked</span></div><div class="card stat"><b id="s4">0</b><span>Risk signals in model</span></div></section>
+<section class="grid"><article class="card"><div class="ct"><div><h3>Scan any URL</h3><p>Works on any domain, any TLD, any language, any country.</p></div><span class="tag">NEURAL-STYLE FUSION</span></div>
+<form id="f"><div class="row"><input id="u" placeholder="https://any-website-in-the-world.tld" autocomplete="off" spellcheck="false" aria-label="URL"><button class="btn" id="b">ANALYZE ▸</button></div></form>
+<div class="hint">Try: <a data-u="https://paypai-secure-login.xyz/verify">paypal lookalike</a><a data-u="http://192.168.4.7/sbi-kyc-update">IP + bank</a><a data-u="https://xn--pypal-4ve.com">IDN homoglyph</a><a data-u="https://www.wikipedia.org">wikipedia</a></div><div id="res"></div></article>
+<article class="card"><div class="ct"><div><h3>Live threat feed</h3><p>Illustrative sample data</p></div><span class="tag">● LIVE</span></div><div class="feed"><div><i></i><span><b>paypaI-secure-billing.com</b><small>Credential harvesting</small></span><span>2m</span></div><div><i class="a"></i><span><b>careers-acme-jobs.net</b><small>Fake recruitment portal</small></span><span>9m</span></div><div><i></i><span><b>sbi-kyc-update.top</b><small>Bank impersonation · IN</small></span><span>16m</span></div><div><i></i><span><b>correios-rastreio.cfd</b><small>Parcel scam · BR</small></span><span>21m</span></div><div><i class="a"></i><span><b>invoice-docs-share.info</b><small>Malicious redirect</small></span><span>28m</span></div></div></article></section>
+<footer class="ft"><span>SENTINEL · HACKATHON CONCEPT v1.0</span><span>Runs entirely in your browser · no URL is ever sent anywhere</span></footer></div>
+<script>
+/* ===== DETECTION MODEL: lexical + structural + brand-graph + noisy-OR fusion ===== */
+const BRANDS=('paypal google microsoft apple amazon facebook instagram netflix whatsapp linkedin dropbox docusign dhl fedex ups usps royalmail chase wellsfargo bankofamerica citibank hsbc barclays santander revolut binance coinbase metamask blockchain sbi hdfcbank icicibank axisbank paytm phonepe alipay wechat taobao tencent baidu rakuten mercadolibre mercadopago itau nubank bradesco caixa correios sberbank yandex mpesa safaricom spotify steam discord telegram adobe zoom outlook office365 twitter tiktok youtube ebay walmart target costco aliexpress alibaba shopee lazada flipkart commbank westpac anz lloyds natwest deutschebank commerzbank bnpparibas creditagricole societegenerale postnl dpd gls yahoo icloud gmail github gitlab cloudflare stripe wise skrill zelle venmo cashapp kraken bybit okx trustwallet uniswap opensea samsung huawei xiaomi uber airbnb booking expedia gov irs hmrc'.split(' ')),
+SLD=new Set('co.uk org.uk ac.uk gov.uk com.au net.au org.au edu.au gov.au co.in net.in org.in gov.in ac.in co.jp ne.jp or.jp ac.jp com.br net.br org.br gov.br com.cn net.cn org.cn gov.cn com.mx com.ar com.co com.pe com.tr com.tw com.hk com.sg com.my com.ph com.pk com.bd com.ng com.eg com.sa com.ua com.vn co.kr or.kr co.id co.th co.nz co.za co.ke co.il'.split(' ')),
+BADTLD=new Set('zip mov xyz top click work country gq tk ml ga cf icu buzz cyou rest fit monster sbs cfd support loan men date stream download review racing win bid trade science party cam vip bond quest lol'.split(' ')),
+FREE='github.io pages.dev netlify.app vercel.app web.app firebaseapp.com blogspot.com weebly.com wixsite.com herokuapp.com glitch.me ngrok.io ngrok-free.app duckdns.org no-ip.com workers.dev r2.dev 000webhostapp.com azurewebsites.net notion.site godaddysites.com carrd.co webflow.io framer.app repl.co ddns.net'.split(' '),
+SHORT=new Set('bit.ly t.co tinyurl.com goo.gl ow.ly is.gd buff.ly rebrand.ly cutt.ly shorturl.at t.ly rb.gy tiny.cc s.id lnkd.in'.split(' ')),
+KW='login log-in signin sign-in verify verification secure security account update confirm password passcode wallet billing invoice payment suspend locked unlock recover refund claim reward prize gift free bonus support helpdesk alert kyc otp upi airdrop giveaway seedphrase recovery authenticate validate iniciar sesion verificar cuenta seguridad clave pago factura connexion verifier compte securite paiement facture anmelden konto bestatigen sicherheit zahlung rechnung entrar conta pagamento fatura seguranca accedi conto fattura giris hesap odeme dogrulama masuk akun pembayaran denglu zhanghu yanzheng rastreio entrega boleto'.split(' ');
+const sk=s=>s.replace(/rn/g,'m').replace(/vv/g,'w').replace(/[1|i]/g,'l').replace(/0/g,'o').replace(/3/g,'e').replace(/5/g,'s'),BSK=Object.fromEntries(BRANDS.map(b=>[b,sk(b)]));
+function lev(a,b){const m=[...Array(b.length+1).keys()];for(let i=1;i<=a.length;i++){let p=m[0];m[0]=i;for(let j=1;j<=b.length;j++){const t=m[j];m[j]=Math.min(m[j]+1,m[j-1]+1,p+(a[i-1]===b[j-1]?0:1));p=t}}return m[b.length]}
+function ent(s){const c={};for(const x of s)c[x]=(c[x]||0)+1;return -Object.values(c).reduce((a,n)=>a+n/s.length*Math.log2(n/s.length),0)}
+function parse(raw){let v=raw.trim();if(!v)return null;let noScheme=false;if(!/^([a-z][a-z0-9+.\-]*:\/\/|(javascript|data|vbscript|file):)/i.test(v)){v='https://'+v;noScheme=true}
+try{const u=new URL(v);const h=u.hostname.toLowerCase().replace(/\.$/,'');if(!/^https?:$/.test(u.protocol))return{u,h:u.protocol,odd:true};
+if(!h||!(h.includes('.')||h.startsWith('['))||/\s/.test(raw.trim()))return null;return{u,h,noScheme,rawNonAscii:/[^\x00-\x7f]/.test(raw)}}catch{return null}}
+function regDomain(h){const p=h.split('.');if(p.length<=2)return{name:p[0],tld:p.slice(1).join('.'),reg:h,sub:[]};
+const l2=p.slice(-2).join('.'),f=FREE.find(x=>h===x||h.endsWith('.'+x));let n=SLD.has(l2)?3:2;if(f)n=f.split('.').length+1;n=Math.min(n,p.length);
+const reg=p.slice(-n).join('.');return{name:p[p.length-n],tld:p.slice(-n+1).join('.'),reg,sub:p.slice(0,-n),free:f}}
+function model(raw){const P=parse(raw);if(!P)return null;const S=[],add=(id,l,w,d)=>S.push({id,l,w,d});const {u,h}=P;
+if(P.odd){add('sch','Dangerous scheme',.95,'“'+h+'” executes code or embeds content instead of opening a website.');return fin(P,S,{name:h,tld:'',reg:h,sub:[]})}
+const isIP=/^(\d{1,3}\.){3}\d{1,3}$/.test(h)||h.startsWith('[')||/^0x[0-9a-f]+$/i.test(h)||/^\d{8,10}$/.test(h);
+const R=isIP?{name:h,tld:'',reg:h,sub:[]}:regDomain(h),tld=R.tld.split('.').pop(),path=decodeURIComponent((u.pathname+u.search).toLowerCase().replace(/%(?![0-9a-f]{2})/g,'')).replace(/[^\x20-\x7e]/g,'');
+const brandName=BRANDS.includes(R.name)&&!BADTLD.has(tld)&&!R.free&&!isIP,trust=brandName&&!u.username;
+if(isIP)add('ip','Raw IP address host',.55,'Legitimate services almost never use a bare IP in a link.');
+if(u.username||/@/.test(u.href.split('?')[0].split('//')[1]?.split('/')[0]||''))add('at','Credentials in URL (user@host)',.6,'Text before @ is a classic trick to disguise the true destination.');
+if(u.protocol==='http:'&&!P.noScheme)add('http','Unencrypted HTTP',.2,'Traffic can be read or altered in transit; no TLS identity.');
+if(u.port&&!['80','443'].includes(u.port))add('port','Non-standard port :'+u.port,.25,'Unusual for consumer sites; common in throwaway servers.');
+if(h.includes('xn--')||P.rawNonAscii){const scripts=new Set((h.match(/[a-z]/g)?'L':'')+(/[\u0400-\u04ff]/.test(raw)?'C':'')+(/[\u0370-\u03ff]/.test(raw)?'G':'')).size;add('idn','Internationalized (IDN/punycode) domain',scripts>1?.7:.4,scripts>1?'Mixes Latin with Cyrillic/Greek letters: a hallmark of homograph spoofing.':'Non-ASCII domains can visually imitate a trusted brand.')}
+if(BADTLD.has(tld)&&!isIP)add('tld','High-abuse TLD .'+tld,.3,'This extension is heavily used for disposable and malicious domains.');
+if(R.free)add('free','Free hosting / dynamic DNS ('+R.free+')',.3,'Anyone can publish here in seconds without identity checks.');
+if(SHORT.has(R.reg))add('short','Link shortener',.35,'The final destination is hidden until you click.');
+if(!isIP&&!P.odd){const toks=h.split(/[.\-_]/),seen=new Set();
+for(const b of BRANDS){if(R.name===b&&!BADTLD.has(tld)&&!R.free)continue;for(const t of toks){if(t===R.name&&t===b)continue;let k=null;
+if(t.length>2&&sk(t)===BSK[b]&&t!==b&&b.length>3)k=['homo','Look-alike spelling of “'+b+'”',.85,'“'+t+'” swaps characters (i/l, 0/o, rn/m) to mimic the real brand.'];
+else if(t===b&&b.length>3)k=['bsub','Brand “'+b+'” on a domain it does not own',.75,'The real site is '+b+'.com-style; this registrable domain is '+R.reg+'.'];
+else if(b.length>=5&&t.includes(b))k=['bemb','Brand “'+b+'” embedded in domain',.7,'Attackers pad brand names with words like secure/login to look official.'];
+else if(b.length>=6&&t.length>=6&&lev(t,b)<=(b.length>=9?2:1))k=['typo','Typosquat of “'+b+'”',.65,'“'+t+'” is one or two keystrokes away from the real name.'];
+if(k&&!seen.has(b)){seen.add(b);add(...k)}}}
+if(!seen.size&&!trust){const pb=BRANDS.find(b=>b.length>4&&path.includes(b)&&R.name!==b);if(pb)add('bpath','Brand “'+pb+'” mentioned in path',.3,'Used to make a foreign page look affiliated with the brand.')}}
+const kws=[...new Set(KW.filter(k=>(h+' '+path).includes(k)))],kw=kws.length;if(kw)add('kw','Phishing vocabulary: '+kws.slice(0,4).join(', '),Math.min(.5,.17*kw)*(trust?.15:1),'Multilingual lure words (EN/ES/FR/DE/PT/IT/TR/ID/ZH/HI translit.).');
+if(R.sub.length>=3&&!trust)add('sub','Deep subdomain nesting ('+R.sub.length+' levels)',.2+.05*(R.sub.length-3),'Long chains push the real domain off-screen on mobile.');
+const hy=(R.name.match(/-/g)||[]).length;if(hy>=2&&!trust)add('hy','Many hyphens in domain',Math.min(.3,.12*hy),'Hyphen-stuffed names are typical of generated scam domains.');
+if(!isIP&&R.name.length>=8&&!brandName){const e=ent(R.name),dg=(R.name.match(/\d/g)||[]).length/R.name.length;if(e>3.5||/[^aeiou\d\-]{6,}/.test(R.name)||dg>.3)add('dga','Random-looking domain name',.35,'High character entropy suggests algorithmically generated (DGA) infrastructure.')}
+if(u.href.length>120)add('len','Very long URL ('+u.href.length+' chars)',.12,'Used to hide malicious parts and bury the real host.');
+if(/[?&](url|redirect|redir|next|target|dest|goto|return|continue|link)=https?(%3a|:)/i.test(u.search))add('red','Open-redirect parameter',.3,'The link bounces you to a different, hidden site.');
+if((u.href.match(/%[0-9a-f]{2}/gi)||[]).length>8)add('enc','Heavy percent-encoding',.15,'Obfuscation to evade filters.');
+return fin(P,S,R,trust)}
+function fin(P,S,R,trust){let q=1;S.forEach(s=>q*=1-s.w);let sc=Math.round((1-q)*100);if(trust&&!S.length)sc=2;S.sort((a,b)=>b.w-a.w);
+const lv=sc<15?['SAFE STRUCTURE','var(--gr)','No known fraud patterns found in this URL.']:sc<35?['LOW RISK','#9bff7a','Minor oddities only. Stay alert.']:sc<60?['SUSPICIOUS','var(--am)','Several fraud indicators fire. Do not enter credentials.']:sc<80?['HIGH RISK','#ff8a4d','Strong match to phishing / impersonation tactics.']:['CRITICAL','var(--rd)','Almost certainly fraudulent. Do not open or share.'];
+return{P,S,R,sc,lv}}
+/* ===== UI ===== */
+const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let n1=0,n2=0;$('s3').textContent=BRANDS.length;$('s4').textContent=20;
+const hr=new Date().getHours();$('greet').textContent=(hr<12?'Good morning':hr<18?'Good afternoon':'Good evening')+', security team';
+setInterval(()=>$('clk').textContent=new Date().toUTCString().slice(17,25)+' UTC',1000);
+$('f').addEventListener('submit',e=>{e.preventDefault();const raw=$('u').value;if(!parse(raw)){$('res').innerHTML='<div class="note" style="border:1px solid var(--rd);color:var(--rd)">Enter a valid web address, for example example.com/path</div>';return}
+const b=$('b');b.disabled=true;const steps=['Decoding URL & scheme','Resolving registrable domain','Scanning Unicode / homoglyphs','Matching global brand graph','Scoring lexical & entropy signals','Fusing evidence (noisy-OR)'];
+$('res').innerHTML='<div class="scan"><div class="radar"></div><div id="log"></div></div>';let i=0;const lg=$('log'),iv=setInterval(()=>{if(i<steps.length)lg.innerHTML+='<div>&gt; '+steps[i++]+' <span style="color:var(--gr)">OK</span></div>';else{clearInterval(iv);show(model(raw));b.disabled=false}},230)});
+document.querySelectorAll('.hint a').forEach(a=>a.onclick=()=>{$('u').value=a.dataset.u;$('f').requestSubmit()});
+function show(m){n1++;if(m.sc>=35)n2++;$('s1').textContent=n1;$('s2').textContent=n2;const{S,R,P,sc,lv}=m,C=2*Math.PI*52;
+const sig=S.length?S.map((s,i)=>`<div class="sig" style="animation-delay:${i*.08}s"><span style="color:${s.w>.5?'var(--rd)':'var(--am)'}">▲</span><div><b>${esc(s.l)}</b><small>${esc(s.d)}</small></div><div class="m"><i style="width:${s.w*100}%;background:${s.w>.5?'var(--rd)':'var(--am)'}"></i></div></div>`).join(''):'<div class="sig"><span style="color:var(--gr)">✓</span><div><b>No fraud signals fired</b><small>Structure, spelling and vocabulary look normal.</small></div><span></span></div>';
+$('res').innerHTML=`<div class="out"><div class="head"><div class="gauge" style="color:${lv[1]}"><svg width="120" height="120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" id="fg" cx="60" cy="60" r="52" stroke="currentColor" stroke-dasharray="${C}" stroke-dashoffset="${C}"/></svg><div><b id="num">0</b><small>/100 RISK</small></div></div><div class="vd"><h4 style="color:${lv[1]}">${lv[0]}</h4><p>${lv[2]}</p></div></div>
+<div class="parts"><div><small>HOST</small><span>${esc(P.h)}</span></div><div><small>REGISTRABLE DOMAIN</small><span>${esc(R.reg)}</span></div><div><small>TLD</small><span>${esc(R.tld||'n/a')}</span></div><div><small>SIGNALS FIRED</small><span>${S.length}</span></div></div>${sig}
+<div class="note">Analysis is structural and runs offline in your browser, so it works for any URL on Earth. It cannot see live page content, WHOIS age or blocklists: a clean score is not a guarantee. Verify sensitive links via the official site.</div></div>`;
+requestAnimationFrame(()=>requestAnimationFrame(()=>{$('fg').style.strokeDashoffset=C*(1-sc/100)}));let c=0;const t=setInterval(()=>{c=Math.min(sc,c+Math.ceil(sc/30)||1);$('num').textContent=c;if(c>=sc)clearInterval(t)},35)}
+/* ===== JARVIS INTRO ===== */
+const cv=$('hud'),g=cv.getContext('2d');let W,H,dpr=devicePixelRatio||1,t0=performance.now(),go=true;
+function rs(){W=cv.width=innerWidth*dpr;H=cv.height=innerHeight*dpr}rs();addEventListener('resize',rs);
+const pts=Array.from({length:90},()=>({a:Math.random()*6.28,r:Math.random(),s:.2+Math.random()*.8}));
+function arc(r,a,sp,c,lw){g.beginPath();g.arc(0,0,r,a,a+sp);g.strokeStyle=c;g.lineWidth=lw*dpr;g.stroke()}
+function draw(now){if(!go)return;const t=(now-t0)/1000,ease=Math.min(1,t/1.6),e=1-Math.pow(1-ease,3);g.clearRect(0,0,W,H);const R=Math.min(W,H)*.3*e;g.save();g.translate(W/2,H*.46);g.lineCap='butt';
+const gl=g.createRadialGradient(0,0,0,0,0,R*1.1);gl.addColorStop(0,'rgba(56,232,255,'+(.22+.08*Math.sin(t*3))+')');gl.addColorStop(1,'rgba(56,232,255,0)');g.fillStyle=gl;g.beginPath();g.arc(0,0,R*1.1,0,6.3);g.fill();
+for(let i=0;i<72;i++){const a=i/72*6.283-t*.25,l=i%6?.03:.07;g.beginPath();g.moveTo(Math.cos(a)*R*(1.04),Math.sin(a)*R*1.04);g.lineTo(Math.cos(a)*R*(1.04+l),Math.sin(a)*R*(1.04+l));g.strokeStyle='rgba(56,232,255,.6)';g.lineWidth=dpr;g.stroke()}
+arc(R*.98,t*.5,1.6,'rgba(56,232,255,.9)',3);arc(R*.98,t*.5+3.3,1.2,'rgba(56,232,255,.5)',3);arc(R*.86,-t*.8,.9,'rgba(61,255,166,.8)',2);arc(R*.86,-t*.8+2.4,1.6,'rgba(56,232,255,.4)',2);
+g.setLineDash([4*dpr,10*dpr]);arc(R*.74,t*.3,6.28,'rgba(56,232,255,.5)',1.5);g.setLineDash([]);arc(R*.6,t*1.2,2.2,'rgba(56,232,255,.9)',4);arc(R*.6,t*1.2+3.4,1.2,'rgba(255,193,77,.7)',4);arc(R*.46,0,6.28,'rgba(56,232,255,.25)',1);
+g.save();g.rotate(t*1.6);const sw=g.createConicGradient?g.createConicGradient(0,0,0):null;if(sw){sw.addColorStop(0,'rgba(56,232,255,0)');sw.addColorStop(.88,'rgba(56,232,255,0)');sw.addColorStop(1,'rgba(56,232,255,.55)');g.fillStyle=sw;g.beginPath();g.arc(0,0,R*.46,0,6.3);g.fill()}g.restore();
+g.save();g.rotate(-t);g.beginPath();for(let k=0;k<3;k++){const a=k*2.094;g.lineTo(Math.cos(a)*R*.2,Math.sin(a)*R*.2)}g.closePath();g.strokeStyle='rgba(223,246,255,.9)';g.lineWidth=2*dpr;g.stroke();g.restore();
+pts.forEach(p=>{p.r-=p.s*.0035;if(p.r<.05)p.r=1;const a=p.a+t*.15*p.s,rr=R*(.5+p.r*1.3);g.fillStyle='rgba(56,232,255,'+(.2+.5*(1-p.r))+')';g.fillRect(Math.cos(a)*rr,Math.sin(a)*rr,2*dpr,2*dpr)});g.restore();requestAnimationFrame(draw)}
+requestAnimationFrame(draw);
+const log=['INITIALIZING SENTINEL CORE','LOADING LEXICAL MODELS · 14 LANGUAGES','BRAND GRAPH · '+BRANDS.length+' GLOBAL ENTITIES','IDN / HOMOGLYPH ENGINE','NOISY-OR EVIDENCE FUSION','ALL SYSTEMS NOMINAL'];let li=0;
+const bi=setInterval(()=>{if(li<log.length){$('boot').innerHTML+='<div><b>[ OK ]</b> '+log[li]+'</div>';li++;$('pb').style.width=li/log.length*100+'%'}else{clearInterval(bi);$('go').classList.add('on')}},520);
+function enter(){if(!$('go').classList.contains('on'))return;$('go').classList.remove('on');try{const s=new SpeechSynthesisUtterance('Sentinel online. All systems nominal. Ready when you are.');s.rate=.95;s.pitch=.8;speechSynthesis.speak(s)}catch{}
+$('intro').classList.add('out');document.body.classList.add('live');setTimeout(()=>{go=false;$('intro').remove()},1100);let c=0;}
+$('go').onclick=enter;addEventListener('keydown',e=>{if(e.key==='Enter')enter()});
+</script></body></html>
